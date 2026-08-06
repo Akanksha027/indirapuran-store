@@ -325,12 +325,7 @@ export async function getCollectionProducts({
 }
 
 export async function getCollections(): Promise<Collection[]> {
-  const res = await shopifyFetch<ShopifyCollectionsOperation>({
-    query: getCollectionsQuery,
-    tags: [TAGS.collections]
-  });
-  const shopifyCollections = removeEdgesAndNodes(res.body?.data?.collections);
-  const collections = [
+  const fallback = [
     {
       handle: '',
       title: 'All',
@@ -341,15 +336,28 @@ export async function getCollections(): Promise<Collection[]> {
       },
       path: '/search',
       updatedAt: new Date().toISOString()
-    },
-    // Filter out the `hidden` collections.
-    // Collections that start with `hidden-*` need to be hidden on the search page.
-    ...reshapeCollections(shopifyCollections).filter(
-      (collection) => !collection.handle.startsWith('hidden')
-    )
+    }
   ];
 
-  return collections;
+  if (!domain || !key) {
+    return fallback;
+  }
+
+  try {
+    const res = await shopifyFetch<ShopifyCollectionsOperation>({
+      query: getCollectionsQuery,
+      tags: [TAGS.collections]
+    });
+    const shopifyCollections = removeEdgesAndNodes(res.body?.data?.collections);
+    return [
+      ...fallback,
+      ...reshapeCollections(shopifyCollections).filter(
+        (collection) => !collection.handle.startsWith('hidden')
+      )
+    ];
+  } catch {
+    return fallback;
+  }
 }
 
 const fallbackMenu: Menu[] = [
@@ -403,21 +411,37 @@ export async function getMenu(handle: string): Promise<Menu[]> {
   }
 }
 
-export async function getPage(handle: string): Promise<Page> {
-  const res = await shopifyFetch<ShopifyPageOperation>({
-    query: getPageQuery,
-    variables: { handle }
-  });
+export async function getPage(handle: string): Promise<Page | undefined> {
+  if (!domain || !key) {
+    return undefined;
+  }
 
-  return res.body.data.pageByHandle;
+  try {
+    const res = await shopifyFetch<ShopifyPageOperation>({
+      query: getPageQuery,
+      variables: { handle }
+    });
+
+    return res.body.data.pageByHandle;
+  } catch {
+    return undefined;
+  }
 }
 
 export async function getPages(): Promise<Page[]> {
-  const res = await shopifyFetch<ShopifyPagesOperation>({
-    query: getPagesQuery
-  });
+  if (!domain || !key) {
+    return [];
+  }
 
-  return removeEdgesAndNodes(res.body.data.pages);
+  try {
+    const res = await shopifyFetch<ShopifyPagesOperation>({
+      query: getPagesQuery
+    });
+
+    return removeEdgesAndNodes(res.body.data.pages);
+  } catch {
+    return [];
+  }
 }
 
 export async function getProduct(handle: string): Promise<Product | undefined> {

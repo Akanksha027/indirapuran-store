@@ -1,52 +1,49 @@
-import { getCollections, getPages, getProducts } from '@/lib/shopify';
-import { validateEnvironmentVariables } from '@/lib/utils';
 import { MetadataRoute } from 'next';
 
-type Route = {
-  url: string;
-  lastModified: string;
-};
-
-const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
-  ? 'https://clothing-store.rashidshamloo.com'
-  : 'http://localhost:3000';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ? process.env.NEXT_PUBLIC_SITE_URL
+  : process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+    : 'http://localhost:3000';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  validateEnvironmentVariables();
+  const now = new Date().toISOString();
 
-  const routesMap = [''].map((route) => ({
+  const staticRoutes = ['', '/search', '/about-us'].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date().toISOString()
+    lastModified: now
   }));
 
-  const collectionsPromise = getCollections().then((collections) =>
-    collections.map((collection) => ({
-      url: `${baseUrl}${collection.path}`,
-      lastModified: collection.updatedAt
-    }))
-  );
-
-  const productsPromise = getProducts({}).then((products) =>
-    products.map((product) => ({
-      url: `${baseUrl}/product/${product.handle}`,
-      lastModified: product.updatedAt
-    }))
-  );
-
-  const pagesPromise = getPages().then((pages) =>
-    pages.map((page) => ({
-      url: `${baseUrl}/${page.handle}`,
-      lastModified: page.updatedAt
-    }))
-  );
-
-  let fetchedRoutes: Route[] = [];
-
-  try {
-    fetchedRoutes = (await Promise.all([collectionsPromise, productsPromise, pagesPromise])).flat();
-  } catch (error) {
-    throw JSON.stringify(error, null, 2);
+  // Shopify-backed routes are optional — site works without store credentials
+  if (!process.env.SHOPIFY_STORE_DOMAIN || !process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
+    return staticRoutes;
   }
 
-  return [...routesMap, ...fetchedRoutes];
+  try {
+    const { getCollections, getPages, getProducts } = await import('@/lib/shopify');
+
+    const [collections, products, pages] = await Promise.all([
+      getCollections().catch(() => []),
+      getProducts({}).catch(() => []),
+      getPages().catch(() => [])
+    ]);
+
+    return [
+      ...staticRoutes,
+      ...collections.map((collection) => ({
+        url: `${baseUrl}${collection.path}`,
+        lastModified: collection.updatedAt || now
+      })),
+      ...products.map((product) => ({
+        url: `${baseUrl}/product/${product.handle}`,
+        lastModified: product.updatedAt || now
+      })),
+      ...pages.map((page) => ({
+        url: `${baseUrl}/${page.handle}`,
+        lastModified: page.updatedAt || now
+      }))
+    ];
+  } catch {
+    return staticRoutes;
+  }
 }

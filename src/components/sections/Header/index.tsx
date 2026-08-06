@@ -19,7 +19,9 @@ const Header = async () => {
         <h2 className="sr-only">Main Navigation Menu</h2>
 
         <div className="flex w-[80px] items-center justify-start">
-          <MobileMenu menu={menu} />
+          <Suspense fallback={null}>
+            <MobileMenu menu={menu} />
+          </Suspense>
         </div>
 
         <Link

@@ -9,7 +9,7 @@ const LatestArticle = dynamic(() => import('@/components/sections/LatestArticle'
 const ShopByCategory = dynamic(() => import('@/components/sections/ShopByCategory'), { loading });
 const AboutUs = dynamic(() => import('@/components/sections/AboutUs'), { loading });
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 const SITE_NAME = process.env.SITE_NAME || 'Riwaaz Indirapuram';
 
