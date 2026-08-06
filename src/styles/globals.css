@@ -1,32 +1,62 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Lora&family=Quicksand:wght@400;500;600;700&display=swap'); */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.btn {
-  @apply relative rounded-[8px] border border-transparent bg-lightPurple px-[32px] py-[16px] font-bold text-darkPurple shadow-md transition-all duration-300 after:absolute after:right-[20px] after:top-[calc(50%_+_2px)] after:font-[swiper-icons] after:text-[20px] after:text-white after:opacity-0 after:transition-all after:duration-300 after:content-['next'] after:-translate-y-1/2 hover:border-lightPurple hover:bg-purple hover:pl-[16px] hover:pr-[48px] hover:text-white hover:after:opacity-100;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-blush text-ink;
+  }
 }
 
-.btn-dark {
-  @apply relative rounded-[8px] border border-transparent bg-purple px-[32px] py-[16px] font-bold text-white shadow-md transition-all duration-300 after:absolute after:right-[20px] after:top-1/2 after:font-[swiper-icons] after:text-[18px] after:text-white after:opacity-0 after:transition-all after:duration-300 after:content-['next'] after:-translate-y-1/2 hover:border-white hover:bg-darkPurple hover:pl-[16px] hover:pr-[48px] hover:after:opacity-100;
-}
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-full border border-gold bg-transparent px-8 py-3 font-playfair text-[15px] tracking-wide text-ink transition-all duration-300 hover:bg-ink hover:text-white hover:border-ink;
+  }
 
-.btn-very-dark {
-  @apply relative rounded-[8px] border border-transparent bg-darkPurple px-[32px] py-[16px] font-bold text-white shadow-md transition-all duration-300 after:absolute after:right-[20px] after:top-1/2 after:font-[swiper-icons] after:text-[18px] after:text-white after:opacity-0 after:transition-all after:duration-300 after:content-['next'] after:-translate-y-1/2 hover:border-white hover:bg-purple hover:pl-[16px] hover:pr-[48px] hover:after:opacity-100;
-}
+  .btn-dark {
+    @apply inline-flex items-center justify-center rounded-full border border-ink bg-ink px-8 py-3 font-playfair text-[15px] tracking-wide text-white transition-all duration-300 hover:bg-transparent hover:text-ink;
+  }
 
-.btn-cart {
-  @apply relative w-full rounded-[8px] border border-transparent bg-purple px-[32px] py-[16px] font-bold text-white shadow-md transition-all duration-300 after:absolute after:right-[20px] after:top-1/2 after:text-[32px] after:text-white after:opacity-0 after:transition-all after:duration-300 after:content-['+'] after:-translate-y-1/2 hover:border-white hover:bg-darkPurple hover:pl-[16px] hover:pr-[48px] hover:text-white hover:after:opacity-100;
-}
+  .btn-very-dark {
+    @apply btn-dark;
+  }
 
-.btn-cart-disabled {
-  @apply relative w-full rounded-[8px] border border-transparent bg-purple px-[32px] py-[16px] font-bold text-white shadow-md;
-}
+  .btn-outline {
+    @apply inline-flex w-full items-center justify-center border border-ink bg-white px-4 py-2.5 text-[13px] font-medium tracking-wide text-ink transition-colors duration-300 hover:bg-ink hover:text-white;
+  }
 
-.hover-line {
-  @apply relative transition-all duration-300 before:absolute before:bottom-0 before:left-1/2 before:h-[1px] before:w-0 before:bg-purple before:opacity-0 before:transition-all before:duration-300 before:will-change-transform before:-translate-x-1/2 hover:text-purple hover:before:w-full hover:before:opacity-100;
-}
+  .btn-cart {
+    @apply relative w-full rounded-none border border-ink bg-ink px-[32px] py-[16px] font-medium text-white transition-all duration-300 hover:bg-white hover:text-ink;
+  }
 
-.header-link {
-  @apply relative h-full before:absolute before:bottom-0 before:left-1/2 before:hidden before:h-[4px] before:w-0 before:bg-purple before:opacity-0 before:transition-all before:duration-300 before:will-change-transform before:-translate-x-1/2 hover:text-purple hover:before:w-full hover:before:opacity-100 md:before:block;
+  .btn-cart-disabled {
+    @apply relative w-full border border-ink/30 bg-ink/40 px-[32px] py-[16px] font-medium text-white;
+  }
+
+  .hover-line {
+    @apply relative transition-all duration-300 before:absolute before:bottom-0 before:left-1/2 before:h-[1px] before:w-0 before:bg-ink before:opacity-0 before:transition-all before:duration-300 before:-translate-x-1/2 hover:before:w-full hover:before:opacity-100;
+  }
+
+  .header-link {
+    @apply relative h-full;
+  }
+
+  .product-skew {
+    clip-path: polygon(12% 0, 100% 0, 88% 100%, 0% 100%);
+  }
+
+  .hero-paint {
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(196, 165, 116, 0.18), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, rgba(239, 230, 220, 0.9), transparent 55%),
+      linear-gradient(135deg, #f7f1ea 0%, #efe6dc 45%, #fbf8f4 100%);
+  }
 }

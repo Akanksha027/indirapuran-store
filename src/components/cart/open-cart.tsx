@@ -7,7 +7,7 @@ export default function OpenCart({ quantity }: { quantity?: number }) {
       <Image src="/images/cart.png" width="36" height="36" alt="cart" />
       {quantity ? (
         <div
-          className="absolute right-0 top-0 h-4 w-4 rounded-full bg-purple text-[11px] font-medium text-white"
+          className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-ink text-[10px] font-medium text-white"
           role="figure"
         >
           {quantity}

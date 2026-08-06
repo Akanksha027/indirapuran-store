@@ -1,0 +1,10 @@
+[
+  { "title": "Ladies", "image": "/images/gallery/gallery-2.jpg", "url": "/search/clothing" },
+  { "title": "Kids", "image": "/images/gallery/promo-1.jpg", "url": "/search/clothing" },
+  { "title": "Gents", "image": "/images/gallery/promo-2.jpg", "url": "/search/clothing" },
+  { "title": "Ethnic Wear", "image": "/images/gallery/gallery-5.jpg", "url": "/search/clothing" },
+  { "title": "New Arrivals", "image": "/images/gallery/gallery-4.jpg", "url": "/search/clothing" },
+  { "title": "Festive", "image": "/images/gallery/gallery-3.jpg", "url": "/search/clothing" },
+  { "title": "Co-ords", "image": "/images/gallery/promo-3.jpg", "url": "/search/clothing" },
+  { "title": "Store Picks", "image": "/images/promotions/store.jpg", "url": "/search/clothing" }
+]

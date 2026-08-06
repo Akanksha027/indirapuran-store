@@ -1,32 +1,22 @@
 // next
 import dynamic from 'next/dynamic';
-
-// react
 import { ReactNode, Suspense } from 'react';
 
-// loading component
 import Loading from '@/components/common/Loading';
 const loading = () => <Loading />;
 
-// components
+import AnnouncementBar from '@/components/sections/AnnouncementBar';
 import Header from '@/components/sections/Header';
-const Footer = dynamic(() => import('@/components/sections/Footer'), {
-  loading
-});
+const Footer = dynamic(() => import('@/components/sections/Footer'), { loading });
 
-// utils
 import { ensureStartsWith } from '@/lib/utils';
-
-// styles
 import '@/styles/globals.css';
+import { greatVibes, jost, playfair } from '@/fonts/fonts';
 
-// fonts
-import { lora, quicksand } from '@/fonts/fonts';
-
-// metadata
-const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
+const SITE_NAME = process.env.SITE_NAME || 'Riwaaz Indirapuram';
+const { TWITTER_CREATOR, TWITTER_SITE } = process.env;
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
-  ? 'https://clothing-store.rashidshamloo.com'
+  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
   : 'http://localhost:3000';
 const twitterCreator = TWITTER_CREATOR ? ensureStartsWith(TWITTER_CREATOR, '@') : undefined;
 const twitterSite = TWITTER_SITE ? ensureStartsWith(TWITTER_SITE, 'https://') : undefined;
@@ -34,9 +24,11 @@ const twitterSite = TWITTER_SITE ? ensureStartsWith(TWITTER_SITE, 'https://') : 
 export const metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: SITE_NAME!,
+    default: SITE_NAME,
     template: `%s | ${SITE_NAME}`
   },
+  description:
+    'Riwaaz Indirapuram — garments for ladies, kids & gents in Indirapuram. WhatsApp: 8368681818',
   robots: {
     follow: true,
     index: true
@@ -47,7 +39,7 @@ export const metadata = {
         card: 'summary_large_image',
         creator: twitterCreator,
         site: twitterSite,
-        images: '/images/screenshots/home.webp'
+        images: '/images/promotions/store.jpg'
       }
     }),
   icons: { icon: '/favicon.png' }
@@ -55,8 +47,12 @@ export const metadata = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${quicksand.variable} ${lora.variable} ${quicksand.className}`}>
-      <body className="bg-white text-veryDarkPurple">
+    <html
+      lang="en"
+      className={`${jost.variable} ${playfair.variable} ${greatVibes.variable} ${jost.className}`}
+    >
+      <body className="bg-white text-ink">
+        <AnnouncementBar />
         <Header />
         <Suspense>
           <main>{children}</main>

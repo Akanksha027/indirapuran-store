@@ -1,27 +1,12 @@
 [
   {
-    "title": "X",
-    "url": "https://twitter.com/rashidshamloo",
-    "image": "/images/footer/social-media/x.png"
-  },
-  {
-    "title": "Facebook",
-    "url": "https://www.linkedin.com/in/rashid-shamloo/",
-    "image": "/images/footer/social-media/facebook.png"
-  },
-  {
     "title": "Instagram",
-    "url": "https://www.rashidshamloo.com/",
+    "url": "https://www.instagram.com/riwaazindirapuram",
     "image": "/images/footer/social-media/instagram.png"
   },
   {
-    "title": "Youtube",
-    "url": "https://www.rashidshamloo.ir/",
-    "image": "/images/footer/social-media/youtube.png"
-  },
-  {
-    "title": "TikTok",
-    "url": "https://dev.to/rashidshamloo",
-    "image": "/images/footer/social-media/tiktok.png"
+    "title": "WhatsApp",
+    "url": "https://wa.me/918368681818",
+    "image": "/images/footer/social-media/whatsapp.svg"
   }
 ]

@@ -71,6 +71,10 @@ export async function shopifyFetch<T>({
   tags?: string[];
   variables?: ExtractVariables<T>;
 }): Promise<{ status: number; body: T } | never> {
+  if (!domain || !key) {
+    throw new Error('Shopify is not configured');
+  }
+
   try {
     const result = await fetch(endpoint, {
       method: 'POST',
@@ -293,23 +297,31 @@ export async function getCollectionProducts({
   sortKey?: string;
   first?: number;
 }): Promise<Product[]> {
-  const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
-    query: getCollectionProductsQuery,
-    tags: [TAGS.collections, TAGS.products],
-    variables: {
-      handle: collection,
-      reverse,
-      sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey,
-      first
-    }
-  });
-
-  if (!res.body.data.collection) {
-    console.log(`No collection found for \`${collection}\``);
+  if (!domain || !key) {
     return [];
   }
 
-  return reshapeProducts(removeEdgesAndNodes(res.body.data.collection.products));
+  try {
+    const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
+      query: getCollectionProductsQuery,
+      tags: [TAGS.collections, TAGS.products],
+      variables: {
+        handle: collection,
+        reverse,
+        sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey,
+        first
+      }
+    });
+
+    if (!res.body.data.collection) {
+      console.log(`No collection found for \`${collection}\``);
+      return [];
+    }
+
+    return reshapeProducts(removeEdgesAndNodes(res.body.data.collection.products));
+  } catch {
+    return [];
+  }
 }
 
 export async function getCollections(): Promise<Collection[]> {
@@ -340,30 +352,55 @@ export async function getCollections(): Promise<Collection[]> {
   return collections;
 }
 
-export async function getMenu(handle: string): Promise<Menu[]> {
-  const res = await shopifyFetch<ShopifyMenuOperation>({
-    query: getMenuQuery,
-    tags: [TAGS.collections],
-    variables: {
-      handle
-    }
-  });
+const fallbackMenu: Menu[] = [
+  {
+    title: 'Clothing',
+    path: '/search/clothing',
+    items: [
+      { title: 'Ladies', path: '/search/clothing' },
+      { title: 'Kids', path: '/search/clothing' },
+      { title: 'Gents', path: '/search/clothing' }
+    ]
+  },
+  { title: 'New Arrivals', path: '/search', items: [] },
+  { title: 'About Us', path: '/about-us', items: [] }
+];
 
-  return (
-    res.body?.data?.menu?.items.map(
-      (item: { title: string; url: string; items: { title: string; url: string }[] }) => ({
-        title: item.title,
-        path: item.url.replace(domain, '').replace('/collections', '/search').replace('/pages', ''),
-        items: item.items.map((item) => ({
+export async function getMenu(handle: string): Promise<Menu[]> {
+  if (!domain || !key) {
+    return fallbackMenu;
+  }
+
+  try {
+    const res = await shopifyFetch<ShopifyMenuOperation>({
+      query: getMenuQuery,
+      tags: [TAGS.collections],
+      variables: {
+        handle
+      }
+    });
+
+    return (
+      res.body?.data?.menu?.items.map(
+        (item: { title: string; url: string; items: { title: string; url: string }[] }) => ({
           title: item.title,
           path: item.url
             .replace(domain, '')
             .replace('/collections', '/search')
-            .replace('/pages', '')
-        }))
-      })
-    ) || []
-  );
+            .replace('/pages', ''),
+          items: item.items.map((item) => ({
+            title: item.title,
+            path: item.url
+              .replace(domain, '')
+              .replace('/collections', '/search')
+              .replace('/pages', '')
+          }))
+        })
+      ) || fallbackMenu
+    );
+  } catch {
+    return fallbackMenu;
+  }
 }
 
 export async function getPage(handle: string): Promise<Page> {
@@ -418,18 +455,26 @@ export async function getProducts({
   sortKey?: string;
   first?: number;
 }): Promise<Product[]> {
-  const res = await shopifyFetch<ShopifyProductsOperation>({
-    query: getProductsQuery,
-    tags: [TAGS.products],
-    variables: {
-      query,
-      reverse,
-      sortKey,
-      first
-    }
-  });
+  if (!domain || !key) {
+    return [];
+  }
 
-  return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
+  try {
+    const res = await shopifyFetch<ShopifyProductsOperation>({
+      query: getProductsQuery,
+      tags: [TAGS.products],
+      variables: {
+        query,
+        reverse,
+        sortKey,
+        first
+      }
+    });
+
+    return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
+  } catch {
+    return [];
+  }
 }
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.

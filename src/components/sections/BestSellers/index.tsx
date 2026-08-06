@@ -10,11 +10,11 @@ import clsx from 'clsx';
 import Slider from './Slider';
 
 // types
-const collections = ['clothing', 'bags', 'shoes', 'accessories'] as const;
+const collections = ['ladies', 'kids', 'gents', 'ethnic'] as const;
 export type Collection = (typeof collections)[number];
 
 const BestSellers = () => {
-  const [activeCollection, setActiveCollection] = useState<Collection>('clothing');
+  const [activeCollection, setActiveCollection] = useState<Collection>('ladies');
   return (
     <section className="flex w-full flex-col items-center justify-center gap-[24px] pb-[32px] pt-[24px] md:gap-[48px] md:pb-[64px] md:pt-[48px]">
       <div className="flex w-full max-w-[95%] flex-col items-center justify-center gap-2 font-lora font-medium text-veryDarkPurple md:w-[904px] md:flex-row md:justify-between md:gap-0">

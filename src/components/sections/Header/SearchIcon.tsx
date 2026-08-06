@@ -29,14 +29,14 @@ const SearchIcon = () => {
       <button
         title="search"
         onClick={() => setIsSearchVisible(!isSearchVisible)}
-        className="header-link hidden md:block [&>*]:transition-all [&>*]:duration-300 hover:[&>*]:opacity-50"
+        className="header-link block [&>*]:transition-all [&>*]:duration-300 hover:[&>*]:opacity-50"
       >
         <Image src="/images/magnifier.png" width="36" height="36" alt="search" />
       </button>
       <AnimatePresence>
         {isSearchVisible && (
           <div
-            className="absolute inset-0 z-40 hidden md:block"
+            className="absolute inset-0 z-40 block"
             onClick={() => setIsSearchVisible(false)}
           >
             <LazyMotion features={domAnimation}>

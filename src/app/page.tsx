@@ -1,47 +1,45 @@
 // next
 import dynamic from 'next/dynamic';
 
-// loading component
 import Loading from '@/components/common/Loading';
 const loading = () => <Loading />;
 
-// components
-import HomeVideo from '@/components/sections/HomeVideo';
-const Discounts = dynamic(() => import('@/components/sections/Discounts'), {
-  loading
-});
-const BestSellers = dynamic(() => import('@/components/sections/BestSellers'), {
-  loading
-});
-const Promotions = dynamic(() => import('@/components/sections/Promotions'), {
-  loading
-});
-const NewArrivals = dynamic(() => import('@/components/sections/NewArrivals/NewArrivals'), {
-  loading
-});
-const AboutUs = dynamic(() => import('@/components/sections/AboutUs'), {
-  loading
-});
+import HeroBanner from '@/components/sections/HeroBanner';
+const LatestArticle = dynamic(() => import('@/components/sections/LatestArticle'), { loading });
+const ShopByCategory = dynamic(() => import('@/components/sections/ShopByCategory'), { loading });
+const AboutUs = dynamic(() => import('@/components/sections/AboutUs'), { loading });
 
 export const runtime = 'edge';
 
+const SITE_NAME = process.env.SITE_NAME || 'Riwaaz Indirapuram';
+
 export const metadata = {
-  description: 'Clothing store e-commerce website by Rashid Shamloo',
-  keywords: ['rumusha', 'clothing', 'store', 'clothing store', 'e-commerce', 'rashid shamloo'],
+  description:
+    'Riwaaz Indirapuram — garments for ladies, kids & gents. Visit our store in Indirapuram or order on WhatsApp.',
+  keywords: [
+    'riwaaz',
+    'riwaaz indirapuram',
+    'clothing',
+    'ethnic wear',
+    'ladies kids gents',
+    'indirapuram',
+    'garments store'
+  ],
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'en_IN',
     url: '/',
-    title: 'Rumusha',
-    siteName: 'Rumusha',
-    description: 'Clothing store e-commerce website by Rashid Shamloo',
+    title: SITE_NAME,
+    siteName: SITE_NAME,
+    description:
+      'Garments for ladies, kids & gents. Store timing 11:00 AM to 9:30 PM · Tuesday closed.',
     images: {
-      url: '/images/screenshots/home.webp',
-      alt: 'Rumusha by Rashid Shamloo',
-      width: 1200,
-      height: 660,
-      type: 'image/webp',
-      secureUrl: '/images/screenshots/home.webp'
+      url: '/images/promotions/store.jpg',
+      alt: 'Riwaaz Indirapuram storefront',
+      width: 640,
+      height: 640,
+      type: 'image/jpeg',
+      secureUrl: '/images/promotions/store.jpg'
     }
   }
 };
@@ -49,11 +47,9 @@ export const metadata = {
 export default async function HomePage() {
   return (
     <>
-      <HomeVideo />
-      <Discounts />
-      <BestSellers />
-      <Promotions />
-      <NewArrivals />
+      <HeroBanner />
+      <LatestArticle />
+      <ShopByCategory />
       <AboutUs />
     </>
   );

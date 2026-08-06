@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1",
+    "title": "Meher Embroidered Kurta Set",
+    "price": "Rs. 2,499.00",
+    "image": "/images/gallery/gallery-2.jpg",
+    "hoverImage": "/images/gallery/gallery-4.jpg",
+    "url": "https://wa.me/918368681818?text=Hi%20Riwaaz%2C%20I%20want%20to%20order%20Meher%20Embroidered%20Kurta%20Set",
+    "category": "ladies"
+  },
+  {
+    "id": "2",
+    "title": "Noor Festive Sharara Set",
+    "price": "Rs. 3,299.00",
+    "image": "/images/gallery/gallery-5.jpg",
+    "hoverImage": "/images/gallery/gallery-3.jpg",
+    "url": "https://wa.me/918368681818?text=Hi%20Riwaaz%2C%20I%20want%20to%20order%20Noor%20Festive%20Sharara%20Set",
+    "category": "ladies"
+  },
+  {
+    "id": "3",
+    "title": "Aarohi Soft Net Suit",
+    "price": "Rs. 2,150.00",
+    "image": "/images/gallery/gallery-4.jpg",
+    "hoverImage": "/images/gallery/gallery-2.jpg",
+    "url": "https://wa.me/918368681818?text=Hi%20Riwaaz%2C%20I%20want%20to%20order%20Aarohi%20Soft%20Net%20Suit",
+    "category": "ladies"
+  },
+  {
+    "id": "4",
+    "title": "Zara Printed Co-ord Set",
+    "price": "Rs. 1,899.00",
+    "image": "/images/gallery/promo-3.jpg",
+    "hoverImage": "/images/gallery/gallery-1.jpg",
+    "url": "https://wa.me/918368681818?text=Hi%20Riwaaz%2C%20I%20want%20to%20order%20Zara%20Printed%20Co-ord%20Set",
+    "category": "ladies"
+  },
+  {
+    "id": "5",
+    "title": "Kids Festive Kurta Set",
+    "price": "Rs. 1,299.00",
+    "image": "/images/gallery/promo-1.jpg",
+    "hoverImage": "/images/gallery/promo-2.jpg",
+    "url": "https://wa.me/918368681818?text=Hi%20Riwaaz%2C%20I%20want%20to%20order%20Kids%20Festive%20Kurta%20Set",
+    "category": "kids"
+  },
+  {
+    "id": "6",
+    "title": "Riwaaz Everyday Ethnic Wear",
+    "price": "Rs. 1,750.00",
+    "image": "/images/gallery/gallery-3.jpg",
+    "hoverImage": "/images/gallery/promo-3.jpg",
+    "url": "https://wa.me/918368681818?text=Hi%20Riwaaz%2C%20I%20want%20to%20order%20Everyday%20Ethnic%20Wear",
+    "category": "ethnic"
+  },
+  {
+    "id": "7",
+    "title": "Indirapuram Exclusive Suit",
+    "price": "Rs. 2,799.00",
+    "image": "/images/gallery/gallery-1.jpg",
+    "hoverImage": "/images/gallery/gallery-5.jpg",
+    "url": "https://wa.me/918368681818?text=Hi%20Riwaaz%2C%20I%20want%20to%20order%20Exclusive%20Suit",
+    "category": "ladies"
+  },
+  {
+    "id": "8",
+    "title": "Gents Casual Co-ord",
+    "price": "Rs. 2,050.00",
+    "image": "/images/gallery/promo-2.jpg",
+    "hoverImage": "/images/gallery/promo-1.jpg",
+    "url": "https://wa.me/918368681818?text=Hi%20Riwaaz%2C%20I%20want%20to%20order%20Gents%20Casual%20Co-ord",
+    "category": "gents"
+  }
+]

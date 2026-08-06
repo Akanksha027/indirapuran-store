@@ -9,18 +9,24 @@ module.exports = {
         xs: '480px'
       },
       colors: {
-        veryDarkPurple: '#2e2e38',
-        darkPurple: '#5c5c70',
-        purple: '#9d9cc9',
-        lightPurple: '#dedeed',
-        veryLightPurple: '#eeeefe'
+        // Design Machine–inspired boutique palette, tinted with Riwaaz gold
+        veryDarkPurple: '#121212',
+        darkPurple: '#4a4a4a',
+        purple: '#c4a574',
+        lightPurple: '#f7f1ea',
+        veryLightPurple: '#fbf8f4',
+        gold: '#c4a574',
+        charcoal: '#121212',
+        blush: '#efe6dc',
+        ink: '#121212'
       },
       fontFamily: {
-        sans: ['var(--font-geist-sans)'],
-        // quicksand: ['Quicksand', 'sans-serif'],
-        // lora: ['Lora', 'serif']
-        lora: ['var(--lora)'],
-        quicksand: ['var(--quicksand)']
+        sans: ['var(--font-jost)', 'sans-serif'],
+        jost: ['var(--font-jost)', 'sans-serif'],
+        playfair: ['var(--font-playfair)', 'serif'],
+        script: ['var(--font-script)', 'cursive'],
+        lora: ['var(--font-playfair)', 'serif'],
+        quicksand: ['var(--font-jost)', 'sans-serif']
       },
       keyframes: {
         fadeIn: {

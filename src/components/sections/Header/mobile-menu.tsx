@@ -61,9 +61,9 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-[-100%]"
           >
-            <Dialog.Panel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-white/70 pb-6 backdrop-blur-lg ">
+            <Dialog.Panel className="fixed bottom-0 left-0 top-0 flex h-full w-[min(85vw,320px)] flex-col overflow-y-auto bg-white pb-6 shadow-xl">
               <div className="px-4 pb-4 pt-2">
-                <div className="mb-4 text-darkPurple">
+                <div className="mb-4 text-ink">
                   <Hamburger
                     toggled={isOpen}
                     onToggle={() => setIsOpen(!isOpen)}
@@ -79,7 +79,7 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                   <ul className="flex w-full flex-col">
                     {menu.map((item: Menu) => (
                       <li
-                        className="py-2 text-xl font-semibold text-darkPurple transition-colors"
+                        className="py-2 text-xl font-semibold text-ink transition-colors"
                         key={item.title}
                       >
                         <Link href={item.path} onClick={closeMobileMenu} className="hover-line">
@@ -89,7 +89,7 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                           <ul className="ml-4 mt-2 flex w-full flex-col">
                             {item.items.map((subItem) => (
                               <li
-                                className="py-2 text-lg font-semibold text-darkPurple transition-colors"
+                                className="py-2 text-lg font-medium text-ink/80 transition-colors"
                                 key={subItem.title}
                               >
                                 <Link
